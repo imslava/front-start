@@ -7,7 +7,7 @@ const autoprefixer = require('gulp-autoprefixer');
 const cleanCSS = require('gulp-clean-css');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify-es').default;
-const fileInclude = require('gulp-file-include');
+const nunjucksRender = require('gulp-nunjucks-render');
 const ngModuleSort = require('gulp-ng-module-sort');
 const replace = require('gulp-replace');
 const cryptoRandomString = require('crypto-random-string');
@@ -59,10 +59,9 @@ const scriptsMin = () => {
 }
 
 const htmlInclude = () => {
-  return src(['./src/*.html'])
-    .pipe(fileInclude({
-      prefix: '@',
-      basepath: '@file'
+  return src(['./src/pages/*.html'])
+    .pipe(nunjucksRender({
+      path: ['./src/pages/']
     }))
     .pipe(dest('./app'))
     .pipe(browserSync.stream());
@@ -87,7 +86,7 @@ const watchFiles = () => {
 
   watch('./src/sass/**/*.sass', styles);
   watch('./src/js/**/*.js', scriptsMin);
-  watch('./src/partials/**/*.html', htmlInclude);
+  watch('./src/pages/**/*.html', htmlInclude);
   watch('./src/*.html', htmlInclude);
   watch('./src/resources/**', resources);
   watch('./src/img/**/*', images);
