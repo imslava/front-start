@@ -10,7 +10,7 @@ const uglify = require('gulp-uglify-es').default;
 const nunjucksRender = require('gulp-nunjucks-render');
 const ngModuleSort = require('gulp-ng-module-sort');
 const replace = require('gulp-replace');
-const listing = require('gulp-listing');
+const listing = require('is-pagelist');
 const cryptoRandomString = require('crypto-random-string');
 const randomVersion = cryptoRandomString({length: 8});
 
@@ -79,9 +79,9 @@ const images = () => {
 };
 
 const pageList = () => {
-  return src('./src/pages/*.html')
+  return src('./app/*.html')
     .pipe(listing('page-list.html'))
-    .pipe(gulp.dest('./app/'));
+    .pipe(dest('./app/'));
 }
 
 const watchFiles = () => {
