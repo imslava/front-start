@@ -10,6 +10,7 @@ const uglify = require('gulp-uglify-es').default;
 const nunjucksRender = require('gulp-nunjucks-render');
 const ngModuleSort = require('gulp-ng-module-sort');
 const replace = require('gulp-replace');
+const listing = require('gulp-listing');
 const cryptoRandomString = require('crypto-random-string');
 const randomVersion = cryptoRandomString({length: 8});
 
@@ -77,6 +78,12 @@ const images = () => {
     .pipe(dest('./app/img'))
 };
 
+const pageList = () => {
+  return src('./src/pages/*.html')
+    .pipe(listing('page-list.html'))
+    .pipe(gulp.dest('./app/'));
+}
+
 const watchFiles = () => {
   browserSync.init({
     server: {
@@ -100,4 +107,4 @@ function versionFile(){
 
 exports.default = series(htmlInclude, libs, scriptsMin, styles, resources, images, watchFiles);
 
-exports.build = series(clean, htmlInclude, libs, scriptsMin, styles, resources, images, versionFile);
+exports.build = series(clean, htmlInclude, libs, scriptsMin, styles, resources, images, versionFile, pageList);

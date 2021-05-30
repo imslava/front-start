@@ -9,6 +9,7 @@
     "gulp-autoprefixer": "^7.0.1",
     "gulp-clean-css": "^4.3.0",
     "gulp-concat": "^2.6.1",
+    "gulp-listing": "^0.0.5",
     "gulp-ng-module-sort": "^0.0.3",
     "gulp-nunjucks-render": "^2.2.3",
     "gulp-replace": "^1.1.3",
